@@ -1,0 +1,43 @@
+:root {
+    --primary-color: #12c2e9;
+    --secondary-color: #c471ed;
+    --tertiary-color: #f64f59;
+    --font-family: 'Varela Round', sans-serif;
+}
+
+body {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--tertiary-color));
+    font-family: var(--font-family);
+}
+
+nav {
+    height: 50px;
+}
+
+h1 {
+    color: #235;
+}
+
+.btn-danger,
+.btn-info {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+input.search {
+    margin-left: 47%;
+}
+
+hr {
+    border-color: black;
+}
