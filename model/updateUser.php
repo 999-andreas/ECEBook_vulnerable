@@ -32,7 +32,7 @@ if(isset($_POST["submit"])){
     $descriptionUser = $_POST["description"] ?? '';
     $emailUser = $_POST["email"] ?? '';
     $confirmerUser = $_POST["confirmer"] ?? '';
-    $mdpUser= password_hash($_POST["motdepasse"], PASSWORD_DEFAULT); 
+    $mdpUser= $_POST["motdepasse"]; 
     $imageUser = $_FILES['image']['name'];
     $filetmpname = $_FILES['image']['tmp_name'];
     $folder = '../uploads/';

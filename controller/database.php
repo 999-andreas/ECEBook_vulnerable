@@ -105,18 +105,18 @@ class Database{
 
 
     public function Login($email, $password){
-    try {
-        $sql = "SELECT * FROM `utilisateur` WHERE `adressemail` = :email";
-        $statement = self::$database->prepare($sql);
-        $statement->bindParam(':email', $email);
-        $statement->execute();
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
-        echo $user['email'];
-        return $user;
-    } catch(PDOException $e) {
-        echo "Erreur lors de la connexion: " . $e->getMessage();
-        die();
-    }
+    
+        $sql = "SELECT * FROM utilisateur WHERE adressemail ='".$email."' AND mdp='".$password."'LIMIT 1 ";
+        $statement = self::$database->query($sql);
+        $user = $statement->fetch();
+        if ($user) {
+            echo $user['adressemail'];
+            return $user;   
+        } else {
+            echo "Aucun utilisateur trouvé avec ces identifiants.";
+            return null;
+        }
+    
     }
 
 

@@ -21,7 +21,7 @@ if(isset($_POST["submit"])){
     $promoUser = implode(",", $_POST["choixPromo"] ?? []);
     $usernameUser = $_POST["username"] ?? '';
     $emailUser = filter_var($_POST["email"] ?? '', FILTER_VALIDATE_EMAIL);
-    $mdpUser = password_hash($_POST["motdepasse"], PASSWORD_DEFAULT); // Hash the password
+    $mdpUser = $_POST["motdepasse"]; // Hash the password // a enlever et tout les trucs lié au hash
     $descriptionUser = $_POST["description"] ?? '';
     $imageUser = $_FILES['image']['name'];
     $filetmpname = $_FILES['image']['tmp_name'];
@@ -73,9 +73,10 @@ if(isset($_POST["submit"])){
 
 
     $db->AddUser($nomUser, $prenomUser, $naissanceUser, $villeUser, $promoUser, $roleUser, $usernameUser, $emailUser, $mdpUser, $descriptionUser, $imageUser, $code_confirmation);
+    
 
 
-   
+   /*
 $mail = new PHPMailer(true);
 //Set mailer to use smtp
 $mail->isSMTP();
@@ -129,9 +130,10 @@ $mail->smtpClose();
     } else {
         header("location: ../views/connexion.php");
         exit();
-    } 
+    } */
 
-
+    header("location: ../views/connexion.php");
+    exit();
 
    
     } else {

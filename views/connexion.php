@@ -35,7 +35,7 @@ if(isset($_SESSION["id_user"])){
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group mb-3 w-100 flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">@</span>
-                                        <input class="form-control w-75 p-3" aria-describedby="addon-wrapping" type="email" name="mail" placeholder="Tapez votre mail" required><br><br>
+                                        <input class="form-control w-75 p-3" aria-describedby="addon-wrapping" type="text" name="mail" placeholder="Tapez votre mail" required><br><br>
                                     </div>
                                 </div>
                                 <br>
