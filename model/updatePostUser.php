@@ -20,7 +20,7 @@ try {
         $titreP = $_POST["titre"] ?? '';
         $messageP = $_POST["message"] ?? '';
         
-        $imagePost = $_FILES['image']['name'];
+        $imagePost = $_FILES['image']['name'];// pas de controle des type de fichier
         $filetmpname = $_FILES['image']['tmp_name'];
         
         $folder = '../uploads/';

@@ -23,7 +23,7 @@ if(isset($_POST["submit"])){
     if (!$emailUser) {
         $errors[] = "L'adresse e-mail n'est pas valide";
     } else {
-        $validDomains = ['edu.ece.fr', 'omnes.intervenant.fr', 'admin.fr'];
+        $validDomains = ['edu.ece.fr', 'omnes.intervenant.fr', 'admin.fr']; // on peut librement mettre admin.fr sans restriction
         $domain = substr(strrchr($emailUser, "@"), 1);
         if (!in_array($domain, $validDomains)) {
             $errors[] = "L'adresse e-mail doit être de domaine edu.ece.fr, omnes.intervenant.fr ou admin.fr";

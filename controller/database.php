@@ -104,7 +104,7 @@ class Database{
 
 
 
-    public function Login($email, $password){
+    public function Login($email, $password){ // j'ai essayé d'enlever tout les sécurité mais pas concluant
     
         $sql = "SELECT * FROM utilisateur WHERE adressemail ='".$email."' AND mdp='".$password."'LIMIT 1 ";
         $statement = self::$database->query($sql);

@@ -8,7 +8,7 @@ if(isset($_POST["submit"])){ // Vérifie si le formulaire a été soumis
     try{
         //recupération des données saisies
         $user_id = $_SESSION["id_user"]; // ID de l'utilisateur connecté
-        $titre = $_POST['titre']; // Titre du post
+        $titre = $_POST['titre']; // Titre du post, aucune protection xss ici
         $nom = $_SESSION["nom"]; // Nom de l'utilisateur connecté
         $message = $_POST['message']; // Contenu du post
         $date_creation = date('Y-m-d H:i:s'); // Date de création du post
@@ -28,7 +28,7 @@ if(isset($_POST["submit"])){ // Vérifie si le formulaire a été soumis
 
     
         $folder = '../uploads/';
-        move_uploaded_file($filetmpname, $folder . $imagePost);
+        move_uploaded_file($filetmpname, $folder . $imagePost); // aucune verification du fichier uploadé
         
 
                 // Sauvegarde des données du formulaire dans la base de données

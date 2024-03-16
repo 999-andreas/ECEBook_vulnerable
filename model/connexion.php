@@ -8,11 +8,10 @@ if(isset($_POST["submit"])){
     $email = htmlspecialchars($_POST["mail"] ?? '');
     $password = htmlspecialchars($_POST["password"] ?? '');
     
-    try {
+    try { // aucune protection contre le bruteforce
         $db = new Database();
         $user = $db->Login($email, $password);
-        if($user ) { // check if user exists and password is correct
-           
+        if($user ) { // j'ai enlever le check du hashage du mdp ici
             //Verification du role
             if($user["roll"] == "admin"){
                 //recupération des données admins

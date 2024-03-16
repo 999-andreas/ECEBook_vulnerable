@@ -10,6 +10,7 @@ require '../vendor/autoload.php';
 
 if(isset($_POST["submit"])){
 //recupération des données
+//tout champs vulnerable XSS
     $errors = [];
 
     $nomUser = $_POST["nom"] ?? '';
@@ -21,9 +22,9 @@ if(isset($_POST["submit"])){
     $promoUser = implode(",", $_POST["choixPromo"] ?? []);
     $usernameUser = $_POST["username"] ?? '';
     $emailUser = filter_var($_POST["email"] ?? '', FILTER_VALIDATE_EMAIL);
-    $mdpUser = $_POST["motdepasse"]; // Hash the password // a enlever et tout les trucs lié au hash
+    $mdpUser = $_POST["motdepasse"]; //j'ai enlever hash 
     $descriptionUser = $_POST["description"] ?? '';
-    $imageUser = $_FILES['image']['name'];
+    $imageUser = $_FILES['image']['name']; // peut être n'importe quel type de fichier
     $filetmpname = $_FILES['image']['tmp_name'];
 
     // Check if email is valid and from a valid domain
