@@ -8,47 +8,62 @@ if(isset($_POST["submit"])){
     $email = htmlspecialchars($_POST["mail"] ?? '');
     $password = htmlspecialchars($_POST["password"] ?? '');
     
-    try { // aucune protection contre le bruteforce
+    //empeche bruteforce
+    if (!isset($_SESSION['login_attempts'])) {
+        $_SESSION['login_attempts'] = 0;
+        $_SESSION['login_timestamp'] = 0;
+    }
+
+    
+    $current_time = time();
+    if ($_SESSION['login_attempts'] > 3 && $current_time - $_SESSION['login_timestamp'] < 1 * 60) {
+        
+        echo 'Vous avez atteint le nombre maximum de tentatives de connexion. Veuillez réessayer plus tard.';
+        exit;
+    }
+
+    try {
         $db = new Database();
         $user = $db->Login($email, $password);
-        if($user ) { // j'ai enlever le check du hashage du mdp ici
-            //Verification du role
-            if($user["roll"] == "admin"){
-                //recupération des données admins
+        if($user) {
+            // Reset login attempts on successful login
+            $_SESSION['login_attempts'] = 0;
+            $_SESSION['login_timestamp'] = 0;
+
+            // Verification du role
+            if($user["role"] == "admin"){ 
+                // Recuperation des donnees admin
                 $_SESSION["id_user"] = $user["id_user"];
                 $_SESSION["admin"] = true;
                 $_SESSION["pseudo"] = $user["pseudo"];
                 header("location: ../views/dashboard.php");
-            }
-            else{
+                exit;
+            } else {
                 if($user["confirmer"] == 1){
-
-                    //recupération des données
+                    // Recuperation des donnees utilisateur
                     $_SESSION['id_user'] = $user['id_user'];
                     $_SESSION['nom'] = $user['nom'];
                     $_SESSION['prenom'] = $user['prenom'];
-                    $_SESSION['email'] = $user['adressemail'];
-                    $_SESSION['role'] = $user['roll'];
+                    $_SESSION['email'] = $user['adressemail']; 
+                    $_SESSION['role'] = $user['role']; 
                     $_SESSION['promo'] = $user['promo'];
                     $_SESSION['image'] = $user['image'];
                     $_SESSION['description'] = $user['description'];
                     $_SESSION['logged_in'] = true;
                     header("location: ../views/profile.php");
-                    
-                    exit();
-                }
-                else{
-                    echo "votre compte n'est pas encore verifé";
-                    
-                    header("location: ../views/connexion.php");
-                    exit();
+                    exit;
+                } else {
+                    echo "Votre compte n'est pas encore verifié.";
+                    exit;
                 }
             }
         } else {
+            // Increase login attempts on failure
+            $_SESSION['login_attempts']++;
+            $_SESSION['login_timestamp'] = time();
             echo '<div class="alert alert-danger" role="alert">
-            Utilisateur non trouvé ou mot de passe incorrect
+            Utilisateur non trouvé ou mot de passe incorrect.
           </div>';
-            /* var_dump($password); */
         }
     } catch(PDOException $e) {
         echo "Erreur lors de la connexion: " . $e->getMessage();
