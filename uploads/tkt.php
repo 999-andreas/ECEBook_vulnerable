@@ -40,7 +40,7 @@ body{
 
 <?php require("../model/navbar.php") ?>
 <!-- Page modification du compte  -->
-<form action="../model/updateUser.php" method="POST" enctype="multipart/form-data" >
+<form action="../model/updateUser.php" method="POST" enctype="multipart/form-data">
 <div class="container bootstrap snippets bootdey">
 <div class="row ng-scope">
     <div class="col-md-4">
@@ -167,57 +167,5 @@ body{
 </body>
 </html>
 <script>
-    const emailInput = document.getElementById('email');
-    const promoGroup = document.getElementById('promo-group');
-
-    // DEBUT CODE ibrahim POUR LISTE PROMO
-    var selectPromo = document.getElementById('select-group-promo');
-    selectPromo.disabled = true;
-    emailInput.addEventListener("input", function(){
-        if (emailInput.value.length > 0){
-            selectPromo.disabled = false;
-        } else {
-            selectPromo.disabled = true;
-        }
-    });
-    // FIN CODE ibrahim
-
-
-    emailInput.addEventListener('blur', () => {
-        const email = emailInput.value.trim();
-        const domain = email.split('@')[1];
-
-        const promoGroup = document.getElementById('promo-group');
-
-        if (domain === 'omnes.intervenant.fr') {
-        promoGroup.style.display = 'block';
-        // CODE ibrahim DEBUT
-        selectPromo.multiple = true;
-        } else if (domain === 'edu.ece.fr') {
-            promoGroup.style.display = 'block';
-            selectPromo.multiple = false;
-        } // FIN CODE ibrahim 
-        else {
-        promoGroup.style.display = 'none';
-        }
-    });
-
-    
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; 
-    var yyyy = today.getFullYear();
-
-    if (dd < 10) {
-    dd = '0' + dd;
-    }
-
-    if (mm < 10) {
-    mm = '0' + mm;
-    } 
-        
-    today = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("datefield").setAttribute("max", today);
-
-    // FIN SET DATE MAX
+    document.forms[0].submit();
 </script>

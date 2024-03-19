@@ -17,7 +17,7 @@ $user = $db->GetUserById($_SESSION["id_user"]);
 
 
 
-if(isset($_POST["submit"])){
+if(isset($_POST["rendu"])){
     //recupération de tous les champs saisie par l'utilisateur
     $user_id = $_SESSION["id_user"];
     $nomUser = $_POST["nom"] ?? '';
@@ -39,10 +39,6 @@ if(isset($_POST["submit"])){
     move_uploaded_file($filetmpname, $folder . $imageUser);
     $db->updateUserByIdUser($user_id, $nomUser,$prenomUser,$naissanceUser,$villeUser,$usernameUser,$mdpUser,$descriptionUser,$emailUser, $promoUser, $imageUser,);
     header("location: ../views/profile.php");
-
-
-
-
 }
 
 
