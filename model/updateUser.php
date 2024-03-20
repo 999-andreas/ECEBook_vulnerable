@@ -17,7 +17,7 @@ $user = $db->GetUserById($_SESSION["id_user"]);
 
 
 
-if(isset($_POST["rendu"])){
+if(isset($_POST["submit"])){
     //recupération de tous les champs saisie par l'utilisateur
     $user_id = $_SESSION["id_user"];
     $nomUser = $_POST["nom"] ?? '';

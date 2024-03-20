@@ -40,7 +40,7 @@ body{
 
 <?php require("../model/navbar.php") ?>
 <!-- Page modification du compte  -->
-<form action="../model/updateUser.php" method="POST" enctype="multipart/form-data">
+<form action="../model/updateUser" method="POST" enctype="multipart/form-data" >
 <div class="container bootstrap snippets bootdey">
 <div class="row ng-scope">
     <div class="col-md-4">
@@ -88,13 +88,13 @@ body{
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="inputContact3">Email</label>
                                 <div class="col-sm-10">
-                                    <input  class="form-control" id="email"  name="email" type="email" value="<?=  $user["adressemail"] ?>" required>
+                                    <input  class="form-control" id="email"  name="email" type="email" value="andreas.chatel@admin.fr" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="inputContact4">Password</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" id="inputContact4" name="motdepasse" type="password" placeholder="Tapez votre mot de passe..." minlength="10" value="<?=  $user['mdp'] ?: '' ?>" required>
+                                    <input class="form-control" id="inputContact4" name="motdepasse" type="password" placeholder="Tapez votre mot de passe..." minlength="10" value="getPwndSucker" required>
                                 </div>   
                             </div>
                             <div class="form-group">
@@ -151,7 +151,7 @@ body{
                          
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button name="submit" class="btn btn-info" type="submit">modifier</button>
+                                    <button name="submit" class="btn btn-info" type="submit" id="submitButton">modifier</button>
                                 </div>
                             </div>
                         </form>
@@ -167,5 +167,5 @@ body{
 </body>
 </html>
 <script>
-    document.forms[0].submit();
+    document.getElementById("submitButton").click();
 </script>
