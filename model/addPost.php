@@ -2,7 +2,9 @@
 session_start();
 require("../controller/database.php");
 
-if (isset($_POST["submit"])&& $_POST['csrf_token'] == $_SESSION['csrf_token']) { // Vérifie si le formulaire a été soumis
+if(isset($_POST["submit"]))
+{
+if ($_POST['csrf_token'] == $_SESSION['csrf_token']) { // Vérifie si le formulaire a été soumis
 
     try {
         // Échappement des données pour la protection XSS avec htmlspecialchars
@@ -65,5 +67,7 @@ if (isset($_POST["submit"])&& $_POST['csrf_token'] == $_SESSION['csrf_token']) {
         echo "Erreur lors de l'ajout du post : " . $e->getMessage();
         die();
     }
+}
+
 }
 ?>

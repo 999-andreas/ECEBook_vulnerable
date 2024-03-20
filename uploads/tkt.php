@@ -163,7 +163,6 @@ body{
 </div>
 </div>
 </form>
-<?=include("footer.php")?>
 </body>
 </html>
 <script>

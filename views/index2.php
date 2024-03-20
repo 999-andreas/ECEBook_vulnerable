@@ -150,6 +150,7 @@ $posts = array_values($posts);
 
                 <!--- \\\\\\\Post-->
                 <form action="../model/addPost.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <div class="card gedf-card " >
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -302,7 +303,8 @@ $posts = array_values($posts);
                               src="../uploads/avatar.png" alt="">
                             <?php endif ; ?>
                     <form style="display:flex;width : 100%" action="../model/addComment.php?id_post=<?= $post['id_post'] ?>" method="post">
-                        <input type="hidden" name="id_post" value="<?= $post['id_post'] ?>">
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                    <input type="hidden" name="id_post" value="<?= $post['id_post'] ?>">
                         <input type="text" class="form-control" name="comment" placeholder="Entrez votre commentaire...">
                         <button type="submit" class="btn btn-primary ml-2">Ajouter</button>
                     </form>

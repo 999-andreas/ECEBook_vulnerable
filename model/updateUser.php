@@ -16,8 +16,8 @@ $db = new Database();
 $user = $db->GetUserById($_SESSION["id_user"]);
 
 
-
-if(isset($_POST["submit"]) && $_POST['csrf_token'] == $_SESSION['csrf_token']){
+if(isset($_POST["submit"])){
+    if($_POST['csrf_token'] == $_SESSION['csrf_token']){
     //recupération de tous les champs saisie par l'utilisateur
     $user_id = $_SESSION["id_user"];
     $nomUser = $_POST["nom"] ?? '';
@@ -43,8 +43,10 @@ if(isset($_POST["submit"]) && $_POST['csrf_token'] == $_SESSION['csrf_token']){
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     header("location: ../views/profile.php");
 
+    }
+    else{
+        die("Erreur CSRF : Jeton CSRF invalide.");
+    }
 }
-else{
-    die("Erreur CSRF : Jeton CSRF invalide.");
-}
+
 ?>
