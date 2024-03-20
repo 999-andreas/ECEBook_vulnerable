@@ -1,6 +1,8 @@
 
 <?php 
 session_start();
+$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
 if(isset($_SESSION["id_user"])){
     // Si l'utilisateur est déjà connecté, rediriger vers la page d'accueil
     header("Location: ../views/index2.php");
@@ -30,7 +32,7 @@ if(isset($_SESSION["id_user"])){
     <h1 style="text-align: center" class="text-dark text-center moving-heading">INSCRIPTION</h1>
     <form action="../model/inscription.php"  method="POST" enctype="multipart/form-data">
         <!-- form inscription -->
-
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
   
         <div class="container mt-5">

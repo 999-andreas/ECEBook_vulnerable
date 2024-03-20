@@ -17,7 +17,7 @@ $user = $db->GetUserById($_SESSION["id_user"]);
 
 
 
-if(isset($_POST["submit"])){
+if(isset($_POST["submit"]) && $_POST['csrf_token'] == $_SESSION['csrf_token']){
     //recupération de tous les champs saisie par l'utilisateur
     $user_id = $_SESSION["id_user"];
     $nomUser = $_POST["nom"] ?? '';
@@ -38,13 +38,13 @@ if(isset($_POST["submit"])){
     $folder = '../uploads/';
     move_uploaded_file($filetmpname, $folder . $imageUser);
     $db->updateUserByIdUser($user_id, $nomUser,$prenomUser,$naissanceUser,$villeUser,$usernameUser,$mdpUser,$descriptionUser,$emailUser, $promoUser, $imageUser,);
+    
+
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     header("location: ../views/profile.php");
 
-
-
-
 }
-
-
-
+else{
+    die("Erreur CSRF : Jeton CSRF invalide.");
+}
 ?>

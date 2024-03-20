@@ -1,6 +1,8 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
 }
 if(isset($_SESSION["id_user"])){
     header("location:../views/profile.php");
@@ -25,6 +27,8 @@ if(isset($_SESSION["id_user"])){
         <h1 class="text-light text-center">Identification</h1><br><br>
 
         <form action="../model/connexion.php" method="POST">
+            
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <div  class="container mt-5">
                 <div class="row">
                     <div class="col-sm-5 m-auto">
@@ -53,6 +57,7 @@ if(isset($_SESSION["id_user"])){
                     </div>
                 </div>
             </div>
+
         </form>
       
 </body>

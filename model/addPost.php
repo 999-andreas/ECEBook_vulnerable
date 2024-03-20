@@ -2,7 +2,7 @@
 session_start();
 require("../controller/database.php");
 
-if (isset($_POST["submit"])) { // Vérifie si le formulaire a été soumis
+if (isset($_POST["submit"])&& $_POST['csrf_token'] == $_SESSION['csrf_token']) { // Vérifie si le formulaire a été soumis
 
     try {
         // Échappement des données pour la protection XSS avec htmlspecialchars
@@ -48,6 +48,8 @@ if (isset($_POST["submit"])) { // Vérifie si le formulaire a été soumis
         // Sauvegarde des données du formulaire dans la base de données
         $db = new Database();
         $db->insertPost($user_id, $titre, $nom, $message, $newFileName, $publique, $date_creation);
+
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
         // Redirection en fonction de la présence d'identifications
         if (!empty($names)) {

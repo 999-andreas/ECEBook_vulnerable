@@ -1,10 +1,14 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
 
+
+
 session_start();
+
+
 require_once("../controller/database.php");
 
-if(isset($_POST["submit"])){
+if(isset($_POST["submit"])&& $_POST['csrf_token'] == $_SESSION['csrf_token']){
     $email = htmlspecialchars($_POST["mail"] ?? '');
     $password = htmlspecialchars($_POST["password"] ?? '');
     
@@ -29,6 +33,7 @@ if(isset($_POST["submit"])){
             // Reset login attempts on successful login
             $_SESSION['login_attempts'] = 0;
             $_SESSION['login_timestamp'] = 0;
+
 
             // Verification du role
             if($user["role"] == "admin"){ 

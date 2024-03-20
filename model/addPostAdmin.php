@@ -2,7 +2,7 @@
 session_start();
 require("../controller/database.php");
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST'&& $_POST['csrf_token'] == $_SESSION['csrf_token']) {
     //recupération des données saisies
     $user_id = $_SESSION["id_user"];
     $titre = $_POST['titre'];
@@ -38,6 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $db->insertPost($user_id, $titre, $pseudo, $message,$imagePost,$publique,$date_creation);
 
+
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     if(empty($names)!=1)
     {
         $_SESSION['names'] = $names;
